@@ -50,7 +50,7 @@ func (con *SourceTemplateController) AddSourceTemplate(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"success": "successfully added"})
+	c.JSON(http.StatusOK, gin.H{"success": "successfully added"})
 }
 
 func (con *SourceTemplateController) GetSourceTemplateByType(c *gin.Context) {
