@@ -47,3 +47,11 @@ func (s *SourceTemplateService) AddSourceTemplate(ctx context.Context, template 
 func (s *SourceTemplateService) GetSourceTemplateByType(ctx context.Context, templateType string) (*entity.SourceTemplate, error) {
 	return s.sourceTemplateRepo.GetSourceTemplateByType(ctx, templateType)
 }
+
+func (s *SourceTemplateService) GetAllSourceTemplates(ctx context.Context) (*[]string, error) {
+	sourceTemplates, err := s.sourceTemplateRepo.GetAllSourceTemplates(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return sourceTemplates, nil
+}

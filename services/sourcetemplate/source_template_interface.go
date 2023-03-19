@@ -8,4 +8,5 @@ import (
 type SourceTemplateServiceInterface interface {
 	AddSourceTemplate(ctx context.Context, template entity.SourceTemplate, userId int64) (string, error)
 	GetSourceTemplateByType(ctx context.Context, templateType string) (*entity.SourceTemplate, error)
+	GetAllSourceTemplates(ctx context.Context) (*[]string, error)
 }

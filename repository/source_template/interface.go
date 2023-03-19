@@ -8,4 +8,5 @@ import (
 type SourceTemplateRepo interface {
 	GetSourceTemplateByType(ctx context.Context, templateType string) (*entity.SourceTemplate, error)
 	InsertSourceTemplate(ctx context.Context, template *entity.SourceTemplate) (string, error)
+	GetAllSourceTemplates(ctx context.Context) (*[]string, error)
 }

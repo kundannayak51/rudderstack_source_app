@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/rudderstack_source_app/entity"
 	"github.com/rudderstack_source_app/services/user"
@@ -30,9 +31,9 @@ func (con *UserController) CreateOrUpdateUser(c *gin.Context) {
 	err := con.userService.CreateOrUpdateUser(ctx, user)
 
 	if err != nil {
-
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error while careating/updating user: %v", err.Error())})
 	}
 
-	c.JSON(http.StatusOK, user)
+	c.JSON(http.StatusOK, gin.H{"success": "user created or updated successfully"})
 
 }

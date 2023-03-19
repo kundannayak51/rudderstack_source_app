@@ -48,3 +48,23 @@ func (r *SourceTemplateRepository) InsertSourceTemplate(ctx context.Context, tem
 
 	return id, nil
 }
+
+func (r *SourceTemplateRepository) GetAllSourceTemplates(ctx context.Context) (*[]string, error) {
+	var types []string
+	cursor, err := r.collection.Find(ctx, bson.D{})
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(context.Background())
+	for cursor.Next(context.Background()) {
+		var template util.SourceTemplate
+		if err := cursor.Decode(&template); err != nil {
+			return nil, err
+		}
+		types = append(types, template.Type)
+	}
+	if err := cursor.Err(); err != nil {
+		return nil, err
+	}
+	return &types, nil
+}

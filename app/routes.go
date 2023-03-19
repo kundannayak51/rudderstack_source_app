@@ -28,6 +28,7 @@ func SetupRoutes(client *mongo.Client) {
 
 	Router.POST("/source-template", sourceTemplateController.AddSourceTemplate)
 	Router.GET("/source-template/:type", sourceTemplateController.GetSourceTemplateByType)
+	Router.GET("/all-source-types", sourceTemplateController.GetAllSourceTypes)
 
 	Router.POST("/source", sourceController.CreateSource)
 	Router.GET("/sources/:type", sourceController.GetAllSources)

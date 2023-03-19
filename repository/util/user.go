@@ -12,7 +12,6 @@ type User struct {
 	Username  string             `bson:"username"`
 	Password  string             `bson:"password"`
 	Email     string             `bson:"email"`
-	CreatedAt time.Time          `bson:"created_at"`
 	UpdatedAt time.Time          `bson:"updated_at"`
 	IsAdmin   bool               `bson:"is_admin"`
 }
@@ -23,7 +22,6 @@ func UserDaoToEntity(u User) *entity.User {
 		Username:  u.Username,
 		Password:  u.Password,
 		Email:     u.Email,
-		CreatedAt: u.CreatedAt,
 		UpdatedAt: u.UpdatedAt,
 		IsAdmin:   u.IsAdmin,
 	}
@@ -35,7 +33,6 @@ func UserEntityToDao(u *entity.User) *User {
 		Username:  u.Username,
 		Password:  u.Password,
 		Email:     u.Email,
-		CreatedAt: u.CreatedAt,
 		UpdatedAt: u.UpdatedAt,
 		IsAdmin:   u.IsAdmin,
 	}

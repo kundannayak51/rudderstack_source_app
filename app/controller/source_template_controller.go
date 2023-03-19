@@ -21,6 +21,10 @@ func NewSourceTemplateController(sourceTemplateService sourcetemplate.SourceTemp
 	}
 }
 
+type SourceTypes struct {
+	Type string `json:"type"`
+}
+
 func (con *SourceTemplateController) AddSourceTemplate(c *gin.Context) {
 
 	userId, _ := strconv.Atoi(c.Request.Header.Get("User-Id"))
@@ -61,4 +65,23 @@ func (con *SourceTemplateController) GetSourceTemplateByType(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusCreated, template)
+}
+
+func (con *SourceTemplateController) GetAllSourceTypes(c *gin.Context) {
+	ctx := utils.GetValueOnlyRequestContext(c)
+	templateTypes, err := con.sourceTemplateService.GetAllSourceTemplates(ctx)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	var sourceTypes []SourceTypes
+
+	for _, template := range *templateTypes {
+		sourceType := SourceTypes{
+			Type: template,
+		}
+		sourceTypes = append(sourceTypes, sourceType)
+	}
+	c.JSON(http.StatusOK, sourceTypes)
 }

@@ -8,6 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"time"
 )
 
 type UserRepository struct {
@@ -39,6 +40,7 @@ func (r *UserRepository) CreateOrUpdateUser(ctx context.Context, user *entity.Us
 	}
 
 	data := util.UserEntityToDao(user)
+	data.UpdatedAt = time.Now()
 	update := bson.M{
 		"$set": data,
 	}
