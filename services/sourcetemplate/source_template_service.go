@@ -23,7 +23,7 @@ func NewService(sourceTemplateRepo source_template.SourceTemplateRepo, userRepo 
 func (s *SourceTemplateService) AddSourceTemplate(ctx context.Context, template entity.SourceTemplate, userId int64) (string, error) {
 	//Check if user is Admin
 	user, err := s.userRepo.GetUserByUserId(ctx, userId)
-	if err == nil {
+	if err != nil {
 		return "", err
 	}
 	if !user.IsAdmin {

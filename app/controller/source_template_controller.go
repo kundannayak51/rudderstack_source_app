@@ -44,13 +44,13 @@ func (con *SourceTemplateController) AddSourceTemplate(c *gin.Context) {
 
 	ctx := utils.GetValueOnlyRequestContext(c)
 
-	id, err := con.sourceTemplateService.AddSourceTemplate(ctx, template, int64(userId))
+	_, err = con.sourceTemplateService.AddSourceTemplate(ctx, template, int64(userId))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"id": id})
+	c.JSON(http.StatusCreated, gin.H{"success": "successfully added"})
 }
 
 func (con *SourceTemplateController) GetSourceTemplateByType(c *gin.Context) {
