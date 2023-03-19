@@ -6,6 +6,6 @@ import (
 )
 
 type SourceServiceInterface interface {
-	CreateSource(ctx context.Context, source entity.Source, userId int64) error
+	CreateSource(ctx context.Context, source entity.Source) error
 	GetAllSources(ctx context.Context, sourceType string) (*[]entity.Source, error)
 }

@@ -24,12 +24,11 @@ func NewService(sourceRepo source.SourceRepo, sourceTemplateRepo source_template
 	}
 }
 
-func (s *SourceService) CreateSource(ctx context.Context, source entity.Source, userId int64) error {
-	_, err := s.userRepo.GetUserByUserId(ctx, userId)
+func (s *SourceService) CreateSource(ctx context.Context, source entity.Source) error {
+	_, err := s.userRepo.GetUserByUserId(ctx, source.UserId)
 	if err != nil {
-		return errors.New(fmt.Sprintf("User: %v not found", userId))
+		return errors.New(fmt.Sprintf("User: %v not found", source.UserId))
 	}
-	source.UserId = userId
 	return s.sourceRepo.CreateSource(ctx, &source)
 }
 

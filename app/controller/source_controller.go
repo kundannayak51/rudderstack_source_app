@@ -8,7 +8,6 @@ import (
 	"github.com/rudderstack_source_app/utils"
 	"io/ioutil"
 	"net/http"
-	"strconv"
 )
 
 type SourceController struct {
@@ -22,8 +21,6 @@ func NewSourceController(sourceService source.SourceServiceInterface) *SourceCon
 }
 
 func (con *SourceController) CreateSource(c *gin.Context) {
-	userId, _ := strconv.Atoi(c.Request.Header.Get("User-Id"))
-
 	jsonBytes, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
@@ -39,9 +36,10 @@ func (con *SourceController) CreateSource(c *gin.Context) {
 
 	ctx := utils.GetValueOnlyRequestContext(c)
 
-	err = con.sourceService.CreateSource(ctx, source, int64(userId))
+	err = con.sourceService.CreateSource(ctx, source)
 	if err != nil {
-
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "Source created successfully"})
 }
