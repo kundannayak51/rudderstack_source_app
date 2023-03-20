@@ -12,8 +12,9 @@
 
 ### Setup in Local
 1. Install golang version 1.18
-2. Run `go mod download`
-3. Install MongoDB and start the MongoDB server by running `mongod` command
+2. Clone the project repo
+3. Run `go mod download`
+4. Install MongoDB and start the MongoDB server by running `mongod` command
 
 
 ### APIs:
